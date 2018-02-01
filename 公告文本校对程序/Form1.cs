@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using System.Text.RegularExpressions;
-
+//https://github.com/mrwang90hou/GFTextProofreading.git
 namespace 公告文本校对程序
 {
     public partial class Form1 : Form
