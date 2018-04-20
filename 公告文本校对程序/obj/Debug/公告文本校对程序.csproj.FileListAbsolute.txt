@@ -32,3 +32,17 @@ H:\王宁\国方C#程序设计\公告文本校对程序\公告文本校对程序
 H:\王宁\国方C#程序设计\公告文本校对程序\公告文本校对程序\obj\Debug\ImgeProClass.uctrl_ImagePro.resources
 H:\王宁\国方C#程序设计\公告文本校对程序\公告文本校对程序\obj\Debug\公告文本校对程序.view_picture_two.resources
 H:\王宁\国方C#程序设计\公告文本校对程序\公告文本校对程序\obj\Debug\公告文本校对程序.Form3.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\bin\Debug\公告文本校对程序.exe.config
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\bin\Debug\公告文本校对程序.exe
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\bin\Debug\公告文本校对程序.pdb
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.csprojResolveAssemblyReference.cache
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.Form1.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.Form2.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.Form3.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.Properties.Resources.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\ImgeProClass.uctrl_ImagePro.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.view_picture_two.resources
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.csproj.GenerateResource.Cache
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.csproj.CoreCompileInputs.cache
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.exe
+H:\王宁\国方C#程序设计\公告文本校对程序git\GFTextProofreading\公告文本校对程序\obj\Debug\公告文本校对程序.pdb

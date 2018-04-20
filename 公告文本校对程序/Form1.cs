@@ -260,7 +260,7 @@ namespace 公告文本校对程序
         #endregion
         #region 文本结果的放大缩小显示
         //设置result_text字体大小
-        int text_font = 15;
+        int text_font = 18;
         private void font_to_small_btn_Click(object sender, EventArgs e)
         {
 
@@ -270,12 +270,12 @@ namespace 公告文本校对程序
             }
             result_text.Font = new Font(result_text.Font.FontFamily, text_font, result_text.Font.Style);
             
-            text_font = text_font - 5;
+            text_font = text_font - 3;
             //result_text.Font = int32.Parse(textbox_FontSize);
         }
         private void font_to_big_btn_Click(object sender, EventArgs e)
         {
-            text_font = text_font + 5;
+            text_font = text_font + 3;
             result_text.Font = new Font(result_text.Font.FontFamily, text_font, result_text.Font.Style);
         }
         #endregion
@@ -614,10 +614,57 @@ namespace 公告文本校对程序
                 //    result_text.AppendText(item + "\r\n");
                 //}
                 //第二种方法
-                result_text.Text = string.Join("\r\n", txt_content);
+                //result_text.Text = string.Join("\r\n", txt_content);
                 //pictureBox1.ImageLocation = totalpath;
                 //pictureBox1.Image = Image.FromFile(totalpath);
 
+                //加入《许可备案公告》许可使用的商品/服务项目   字段的换行判断
+                /*
+                if (linesNumber == 12)
+                {
+                    //MessageBox.Show("《许可备案公告》"+ txt_content[3]);
+
+                    //char[] c = txt_content[3].ToArray();
+                    //List<char> new_str_list = new List<char>();
+                    List<string> new_txt_content3_list = new List<string>();
+                    string str = txt_content[3];
+                    string str_temp="";
+                    int temp = 0;
+                    foreach (char item in str)
+                    {
+                        //MessageBox.Show(item.ToString());
+                        temp++;
+                        //if (item >= 48 && item <= 58)
+                        if (temp == 26)
+                        {
+                            //MessageBox.Show(str_temp);
+                            new_txt_content3_list.Add(str_temp);
+                            str_temp = "";
+                            temp = 0;
+                        }
+                        else
+                        {
+                            str_temp += item;
+                        }
+                    }
+                    new_txt_content3_list.Add(str_temp);
+                    string[] new_txt_content3_array = new_txt_content3_list.ToArray();
+                    string new_txt_content3 = "";
+                    foreach (string item in new_txt_content3_array)
+                    {
+                        new_txt_content3 = new_txt_content3+"\n"+item;
+                        //MessageBox.Show(item);
+                    }
+                    txt_content[3] = new_txt_content3;
+                    MessageBox.Show(txt_content[3]);
+                    result_text.Text = string.Join("\r\n", txt_content);
+                }
+                else
+                {
+                    result_text.Text = string.Join("\r\n", txt_content);
+                }
+                */
+                result_text.Text = string.Join("\r\n", txt_content);
                 //验证文本内容是否异常的方法
                 Validate_textContent_error();
                 //载入缓存记录
@@ -626,7 +673,7 @@ namespace 公告文本校对程序
             }
             catch (Exception)
             {
-                result_text.Text = "错误！";
+                result_text.Text = "加载文本错误！";
                 return;
                 throw;
             }
@@ -1004,6 +1051,7 @@ namespace 公告文本校对程序
                 result_text.ForeColor = System.Drawing.Color.Red;
                 label7.Show();
                 label7.Text = "文本格式存在错误！";
+                //MessageBox.Show(result_text.Lines.Length.ToString());
                 return false;
             }
             else
@@ -1221,13 +1269,13 @@ namespace 公告文本校对程序
             foreach (char item in str)
             {
                 //if (item >= 48 && item <= 58)
-                if (item >= 0x4e00 && item <= 0x9fbb)//判断是否为中文    或者     存在连续英文
+                if (validateNum(item.ToString()) || IsNumAndEnCh(item.ToString()))//判断数字或者为字母
                 {
-                    break;
+                    number += item;
                 }
                 else
                 {
-                    number += item;
+                    break;
                 }
             }
             //foreach (var item in c)
@@ -1417,13 +1465,6 @@ namespace 公告文本校对程序
 
             //return false;//不满足
         }
-        //private string GetMarkCode(string str)
-        //{
-
-
-
-        //    return null;
-        //}
 
 
 
