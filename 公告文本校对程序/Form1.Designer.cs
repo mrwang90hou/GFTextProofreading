@@ -62,6 +62,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.uctrl_ImgPro0 = new ImgeProClass.uctrl_ImagePro();
             this.uctrl_ImagePro1 = new ImgeProClass.uctrl_ImagePro();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,7 +194,7 @@
             // 
             // work_record_btn
             // 
-            this.work_record_btn.Location = new System.Drawing.Point(1317, 12);
+            this.work_record_btn.Location = new System.Drawing.Point(1240, 14);
             this.work_record_btn.Name = "work_record_btn";
             this.work_record_btn.Size = new System.Drawing.Size(75, 23);
             this.work_record_btn.TabIndex = 9;
@@ -258,7 +259,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.ForeColor = System.Drawing.Color.Fuchsia;
-            this.label6.Location = new System.Drawing.Point(750, 6);
+            this.label6.Location = new System.Drawing.Point(723, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(415, 33);
             this.label6.TabIndex = 16;
@@ -289,9 +290,9 @@
             // 
             // Save_workSpace
             // 
-            this.Save_workSpace.Location = new System.Drawing.Point(1194, 12);
+            this.Save_workSpace.Location = new System.Drawing.Point(1144, 14);
             this.Save_workSpace.Name = "Save_workSpace";
-            this.Save_workSpace.Size = new System.Drawing.Size(117, 23);
+            this.Save_workSpace.Size = new System.Drawing.Size(90, 23);
             this.Save_workSpace.TabIndex = 9;
             this.Save_workSpace.Text = "保存工作路径";
             this.Save_workSpace.UseVisualStyleBackColor = true;
@@ -342,7 +343,7 @@
             // open_thisFileFolder_btn
             // 
             this.open_thisFileFolder_btn.Image = global::公告文本校对程序.Properties.Resources.图片1;
-            this.open_thisFileFolder_btn.Location = new System.Drawing.Point(1326, 107);
+            this.open_thisFileFolder_btn.Location = new System.Drawing.Point(1310, 107);
             this.open_thisFileFolder_btn.Name = "open_thisFileFolder_btn";
             this.open_thisFileFolder_btn.Size = new System.Drawing.Size(24, 23);
             this.open_thisFileFolder_btn.TabIndex = 18;
@@ -399,11 +400,22 @@
             this.uctrl_ImagePro1.Size = new System.Drawing.Size(927, 608);
             this.uctrl_ImagePro1.TabIndex = 21;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1323, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "文本替换";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1412, 741);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.uctrl_ImgPro0);
             this.Controls.Add(this.frist_page_btn);
             this.Controls.Add(this.last_page_btn);
@@ -482,6 +494,7 @@
         private System.Windows.Forms.Button Save_workSpace;
         private System.Windows.Forms.Label error_label;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button1;
     }
 }
 

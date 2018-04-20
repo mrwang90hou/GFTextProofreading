@@ -1466,7 +1466,54 @@ namespace 公告文本校对程序
             //return false;//不满足
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //统计累计替换个数
+            int total=0;
 
 
+
+            string path = @"H:\王宁\国方C#程序设计\公告文本校对程序\测试样本\替换文本测试";
+            string[] pathFile = Directory.GetFiles(path);
+            MessageBox.Show(string.Join("\n",pathFile));
+            string con = "";
+            foreach (string str in pathFile)
+            {
+                FileStream fs = new FileStream(str, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(fs);
+                con = sr.ReadToEnd();
+
+
+
+                //public static int indexOf(字符串/ 字符,int从第几位开始,int共查几位)
+
+                //string tests = "1absjjkcbfka2rsbcfak2bfka1";      //测试字符串
+                con = con.Replace("year","年");
+                con = con.Replace("month","月");
+                con = con.Replace("day","日");
+                int i = con.IndexOf("year", 0, con.Length);      //查找从第五字符向后查找“2b”
+                string[] j = con.Split('年');
+                total += j.Length - 1; 
+                MessageBox.Show("year的个数为：" + (j.Length-1).ToString());
+                //textBox2.Text = i.ToString();
+                //int i = tests.IndexOf("2b", 5, 2);      //查找从第五字符向后查找两个字符是否有“2b”
+
+                //返回 - 1   表示未找到“2b”
+
+
+                con = con.Replace("年", "year");
+                con = con.Replace("月", "month");
+                con = con.Replace("日", "day");
+                con = con.Replace("公司","公司");
+                sr.Close();
+                fs.Close();
+                FileStream fs2 = new FileStream(str, FileMode.Open, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs2);
+                sw.WriteLine(con);
+                sw.Close();
+                fs2.Close();
+            }
+            MessageBox.Show("转换完成\n"+"共计替换个数为："+total+"个");
+        }
     }
 }
