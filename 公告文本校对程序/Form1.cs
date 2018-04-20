@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using System.Text.RegularExpressions;
-//https://github.com/mrwang90hou/GFTextProofreading.git
+
 namespace 公告文本校对程序
 {
     public partial class Form1 : Form
@@ -17,7 +17,7 @@ namespace 公告文本校对程序
         }
         public static int linesNumber;
         public static string extension_name;
-        public static string date_number;//期号
+        public static string date_number;//期号hj 
         public static string path = System.IO.Directory.GetCurrentDirectory();//获取当前应用程序所在路径
         public static string error_picture_path = Path.Combine(path, @"error_picture.jpg");//生成“错误图片提示”的路径
         public static string totalPath = "";
@@ -61,13 +61,13 @@ namespace 公告文本校对程序
         {
             totalPath2 = picture_path.Text;
             //判断图片个数与文本个数是否相同
-            GetFilesName(txt_path.Text, out string[] filesPaths1, out string[] filesnames1, out date_number);
+            GetFilesName(picture_path.Text, out string[] filesPaths1, out string[] filesnames1, out date_number);
+            GetFilesName(txt_path.Text, out string[] filesPaths2, out string[] filesnames2, out date_number);
             
-            GetFilesName(picture_path.Text, out string[] filesPaths2, out string[] filesnames2, out date_number);
-            
-            if (filesPaths1.Length!= filesnames2.Length)
+            if (filesnames1.Length!= filesnames2.Length)
             {
                 MessageBox.Show("资源路径的文件个数不相同！","错误提示！");
+                MessageBox.Show("图片资源个数：" + filesnames1.Length + "\n文本资源个数：" + filesnames2.Length, "文件个数不相同!");
                 return;
             }
             f3.ShowDialog();
@@ -78,7 +78,6 @@ namespace 公告文本校对程序
             //MessageBox.Show(linesNumber+ extension_name);
             pages_goto_btn.PerformClick();
             
-
         }
         private void prepare()
         {
@@ -465,10 +464,6 @@ namespace 公告文本校对程序
                 pages_goto_btn.PerformClick();
             }
         }
-
-
-
-
         #endregion
         //保存按钮
         private void confirm_to_btn_Click(object sender, EventArgs e)
@@ -663,7 +658,7 @@ namespace 公告文本校对程序
                                // StreamReader reader = new StreamReader(txtUrl, Encoding.GetEncoding("gb2312"));
                                //或使用默认编码格式
                                //StreamReader sR = new StreamReader(filePath, System.Text.Encoding.Default)
-                using (StreamReader reader = new StreamReader(file,Encoding.UTF8))
+                using (StreamReader reader = new StreamReader(file,Encoding.Default))
                 {
                     line_txt = reader.ReadLine();
                     //while (line_txt != "" && line_txt != null)
@@ -713,9 +708,9 @@ namespace 公告文本校对程序
                 }
                 string[] new_txt_content = lis.ToArray();
                 //MessageBox.Show(string.Join("\n", new_txt_content));
-                File.WriteAllLines(endpath, new_txt_content, Encoding.UTF8);
+                File.WriteAllLines(endpath, new_txt_content, Encoding.Default);
                 //Write(endpath, new_txt_content);
-                
+                 
                 ////保存的缓存记录
                 SaveHistoryMethod();
 
@@ -729,7 +724,6 @@ namespace 公告文本校对程序
                 throw;
             }
         }
-
         public static void Write(string path, string[] name)//写入文件
         {
             FileStream fs = new FileStream(path, FileMode.Create);
@@ -737,7 +731,7 @@ namespace 公告文本校对程序
             //开始写入
             foreach (var item in name)
             {
-                sw.Write(item,Encoding.UTF8);
+                sw.Write(item,Encoding.Default);
             }
             //清空缓冲区
             sw.Flush();
@@ -796,14 +790,19 @@ namespace 公告文本校对程序
                 string[] temp = new string[filesPaths.Length];
                 string[] new_temp = new string[filesPaths.Length];
                 int li_Index = 0; //变量声明
+            int sum = 0;
                 for (int i = 0; i < filesPaths.Length; i++)
                 {
                     temp[i] = filesPaths[i].Replace(filesPath, "");
                     li_Index = temp[i].LastIndexOf("_");//获得_的位置
                     new_temp[i] = temp[i].Substring(li_Index + 1, temp[i].Length - 1 - li_Index);//获得目标字符串
                     new_temp[i] = new_temp[i].Replace(@".txt", "");
+                sum++;
                 }
-                filesnames = new_temp;
+            //MessageBox.Show(filesPaths.Length.ToString(), "filesPaths.Length");
+            //MessageBox.Show(filesPaths[sum-1], "sum");
+            //MessageBox.Show(sum.ToString(), "sum");
+            filesnames = new_temp;
             string one_filesName = Path.GetFileNameWithoutExtension(filesPaths[0].ToString());
             string[] strArray = one_filesName.Split('_');
             date_number = strArray[0];
@@ -1173,7 +1172,7 @@ namespace 公告文本校对程序
 
         //方案二
         AutoSizeFormClass2 asc2 = new AutoSizeFormClass2();
-        private bool width;
+        //private bool width;
 
         /// <summary>  
         /// RegisterFrm大小改变时触发  
@@ -1214,23 +1213,21 @@ namespace 公告文本校对程序
             LoadSettingContent.Default.Save();
         }
         
-        private bool GetMarkCode(string str)
+        private bool GetMarkCode(string str)//判断注册号
         {
-
             char[] c = str.ToArray();
             List<char> new_str_list = new List<char>();
-
-            
             string number = null;
             foreach (char item in str)
             {
-                if (item >= 48 && item <= 58)
+                //if (item >= 48 && item <= 58)
+                if (item >= 0x4e00 && item <= 0x9fbb)//判断是否为中文    或者     存在连续英文
                 {
-                    number += item;
+                    break;
                 }
                 else
                 {
-                    break;
+                    number += item;
                 }
             }
             //foreach (var item in c)
@@ -1250,9 +1247,11 @@ namespace 公告文本校对程序
             //string markcode = new string(new_char);
             string markcode = number;
 
-            //MessageBox.Show(string.Join("",markcode));
+            //MessageBox.Show(string.Join("", markcode));
+
             if (!MarkCode_check(markcode))
             {
+                //MessageBox.Show(MarkCode_check(str).ToString());
                 return false;
             }
             return true;
@@ -1293,17 +1292,23 @@ namespace 公告文本校对程序
             Regex r1 = new Regex(pattern1); //正则表达式 表示数字的范围 ^符号是开始，9$是关闭
             frist_char_pd = r1.IsMatch(frist_char.ToString());
             //(3)中间字符只能为0-9
+            //MessageBox.Show("mindle_string\t" + mindle_string);
             mindle_pd = validateNum(mindle_string);
             //(4)尾字符只能为0 - 9或A - Z
+            //MessageBox.Show("end_char\t" + end_char.ToString());
             end_char_pd = IsNumAndEnCh(end_char.ToString());
+            //MessageBox.Show("char_number_pd" + char_number_pd.ToString());
+            //MessageBox.Show("frist_char_pd" + frist_char_pd.ToString());
+            //MessageBox.Show("mindle_pd" + mindle_pd.ToString());
+            //MessageBox.Show("end_char_pd" + end_char_pd.ToString());
             if (char_number_pd && frist_char_pd && mindle_pd && end_char_pd)
             {
+                //MessageBox.Show("true!!!");
                 return true;
             }
             return false;
             
         }
-
         #region 验证文本框输入为整数
         /// <summary>
         /// 验证文本框输入为整数
@@ -1313,6 +1318,9 @@ namespace 公告文本校对程序
         public static bool validateNum(string strNum)
         {
             //return Regex.IsMatch(strNum,@"^[+]?\d*$");
+
+            //MessageBox.Show(Regex.IsMatch("23w2451", @"^[+]?\d*$").ToString());
+
             if (Regex.IsMatch(strNum, @"^[+]?\d*$"))//是否找到匹配项
             {
                 return true;
